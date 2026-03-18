@@ -1,8 +1,8 @@
 const CACHE_NAME = 'ai-pwa-app-v2';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  '/pwa_for_ai_tools/',
+  '/pwa_for_ai_tools/index.html',
+  '/pwa_for_ai_tools/manifest.json'
 ];
 
 // Install – cache core assets
