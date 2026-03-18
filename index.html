@@ -34,9 +34,93 @@
             margin-top: 20px;
         }
 
+        /* ── Project cards ── */
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover  { box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .project-card:active { transform: scale(0.98); }
+        .project-info h3 { margin: 0; color: #007bff; }
+        .project-info p  { margin: 5px 0 0; font-size: 14px; color: #666; }
+        .arrow { color: #ccc; font-size: 20px; }
+        #project-list { padding-bottom: 120px; }
+
+        /* ── Full-screen iframe viewer ── */
+        #app-frame {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 8000;
+            background: #07080c;
+            flex-direction: column;
+        }
+        #app-frame.open { display: flex; }
+
+        #frame-topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #0d0f16;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        #frame-back {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #eee;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        #frame-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #eeeef5;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #frame-ext {
+            background: rgba(232,164,48,0.12);
+            border: 1px solid rgba(232,164,48,0.3);
+            color: #e8a430;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        #main-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
         /* ── Install Banner ── */
         #install-banner {
-            display: none; /* shown via JS */
+            display: none;
             position: fixed;
             bottom: 24px;
             left: 50%;
@@ -52,44 +136,18 @@
             gap: 14px;
             animation: slideUp 0.35s ease;
         }
-
-        #install-banner.visible {
-            display: flex;
-        }
+        #install-banner.visible { display: flex; }
 
         @keyframes slideUp {
             from { opacity: 0; transform: translateX(-50%) translateY(40px); }
             to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        .banner-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            flex-shrink: 0;
-        }
-
-        .banner-text {
-            flex: 1;
-        }
-
-        .banner-text strong {
-            display: block;
-            font-size: 15px;
-            color: #111;
-        }
-
-        .banner-text span {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .banner-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-shrink: 0;
-        }
+        .banner-icon { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; }
+        .banner-text { flex: 1; }
+        .banner-text strong { display: block; font-size: 15px; color: #111; }
+        .banner-text span   { font-size: 13px; color: #666; }
+        .banner-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
 
         #btn-install {
             background: #007bff;
@@ -101,11 +159,8 @@
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
-            transition: background 0.2s;
         }
-
         #btn-install:hover { background: #0056d6; }
-
         #btn-dismiss {
             background: transparent;
             color: #999;
@@ -113,10 +168,7 @@
             font-size: 13px;
             cursor: pointer;
             text-align: center;
-            padding: 2px 0;
         }
-
-        #btn-dismiss:hover { color: #555; }
 
         /* ── iOS instructions modal ── */
         #ios-modal {
@@ -129,7 +181,6 @@
             align-items: flex-end;
             padding: 20px;
         }
-
         #ios-modal.visible { display: flex; }
 
         .ios-modal-box {
@@ -139,27 +190,11 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            animation: slideUp 0.3s ease;
         }
-
         .ios-modal-box h3 { margin: 0 0 8px; font-size: 17px; }
         .ios-modal-box p  { margin: 0 0 18px; font-size: 14px; color: #555; line-height: 1.5; }
-
-        .ios-steps {
-            text-align: left;
-            background: #f4f7f6;
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-        }
-
-        .ios-steps li {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
+        .ios-steps { text-align: left; background: #f4f7f6; border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; }
+        .ios-steps li { font-size: 14px; color: #333; margin-bottom: 8px; line-height: 1.5; }
         .ios-steps li:last-child { margin-bottom: 0; }
 
         #btn-ios-close {
@@ -173,44 +208,26 @@
             font-weight: 600;
             cursor: pointer;
         }
-
-        /* ── Project cards ── */
-        .project-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .project-card:hover  { box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-        .project-card:active { transform: scale(0.98); }
-
-        .project-info h3 { margin: 0; color: #007bff; }
-        .project-info p  { margin: 5px 0 0; font-size: 14px; color: #666; }
-
-        .arrow { color: #ccc; font-size: 20px; }
-
-        /* padding so cards aren't hidden behind banner */
-        #project-list { padding-bottom: 120px; }
     </style>
 </head>
 <body>
 
     <h1>AI Search Tool</h1>
-
     <div class="container" id="project-list"></div>
 
-    <!-- ── Install Banner (Android / Desktop) ── -->
-    <div id="install-banner" role="banner" aria-label="Install app">
-        <img class="banner-icon"
-             src="https://placehold.co/192x192/007bff/ffffff?text=AI"
-             alt="App icon">
+    <!-- ── Full-screen iframe viewer ── -->
+    <div id="app-frame">
+        <div id="frame-topbar">
+            <button id="frame-back" onclick="closeFrame()">← Back</button>
+            <span id="frame-title"></span>
+            <a id="frame-ext" href="#" target="_blank" rel="noopener noreferrer">Open ↗</a>
+        </div>
+        <iframe id="main-iframe" allow="fullscreen" loading="lazy"></iframe>
+    </div>
+
+    <!-- ── Install Banner ── -->
+    <div id="install-banner" role="banner">
+        <img class="banner-icon" src="https://placehold.co/192x192/007bff/ffffff?text=AI" alt="App icon">
         <div class="banner-text">
             <strong>Install AI Search Tool</strong>
             <span>Add to your home screen for quick access</span>
@@ -222,7 +239,7 @@
     </div>
 
     <!-- ── iOS Install Instructions Modal ── -->
-    <div id="ios-modal" role="dialog" aria-modal="true" aria-label="How to install on iOS">
+    <div id="ios-modal" role="dialog" aria-modal="true">
         <div class="ios-modal-box">
             <h3>📲 Install on iPhone / iPad</h3>
             <p>Safari doesn't support automatic install prompts, but you can still add this app to your Home Screen:</p>
@@ -245,13 +262,14 @@
             }
         ];
 
+        // ── Render cards as buttons (not <a> links) ───────────────────
+        // Using buttons + iframe avoids the Google "unable to open" error
+        // that triggers when a PWA/WebView tries to open an Apps Script URL
+        // in a new tab on mobile.
         const listContainer = document.getElementById('project-list');
         myProjects.forEach(project => {
-            const card = document.createElement('a');
-            card.href = project.url;
+            const card = document.createElement('button');
             card.className = 'project-card';
-            card.target = "_blank";
-            card.rel = "noopener noreferrer";
             card.innerHTML = `
                 <div class="project-info">
                     <h3>${project.name}</h3>
@@ -259,15 +277,40 @@
                 </div>
                 <div class="arrow">➔</div>
             `;
+            card.addEventListener('click', () => openFrame(project.name, project.url));
             listContainer.appendChild(card);
+        });
+
+        // ── Iframe open / close ───────────────────────────────────────
+        function openFrame(name, url) {
+            document.getElementById('frame-title').textContent = name;
+            document.getElementById('frame-ext').href = url;
+            document.getElementById('main-iframe').src = url;
+            document.getElementById('app-frame').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            // push a history entry so Android back button closes the frame
+            history.pushState({ frame: true }, '');
+        }
+
+        function closeFrame() {
+            document.getElementById('app-frame').classList.remove('open');
+            document.getElementById('main-iframe').src = 'about:blank';
+            document.body.style.overflow = '';
+        }
+
+        // Android hardware back button
+        window.addEventListener('popstate', () => {
+            if (document.getElementById('app-frame').classList.contains('open')) {
+                closeFrame();
+            }
         });
 
         // ── Service Worker ────────────────────────────────────────────
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                    .then(() => console.log('✅ SW registered'))
-                    .catch(err => console.warn('SW registration failed:', err));
+                    .then(() => console.log('SW registered'))
+                    .catch(err => console.warn('SW failed:', err));
             });
         }
 
@@ -277,17 +320,14 @@
         const btnDismiss  = document.getElementById('btn-dismiss');
         const iosModal    = document.getElementById('ios-modal');
         const btnIosClose = document.getElementById('btn-ios-close');
-
         let deferredPrompt = null;
 
-        // Detect iOS (Safari)
         const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-        const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
-                                   || window.navigator.standalone;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                             || window.navigator.standalone;
 
-        // Show iOS instructions if on iOS and not yet installed
-        if (isIos && !isInStandaloneMode) {
-            // Small delay so the page loads first
+        // iOS: show manual instructions banner
+        if (isIos && !isStandalone) {
             setTimeout(() => {
                 banner.classList.add('visible');
                 btnInstall.textContent = '📲 How to Install';
@@ -298,35 +338,27 @@
             }, 1500);
         }
 
-        // Android / Desktop: capture the browser's native prompt
+        // Android / Desktop: native install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();               // stop mini-infobar
+            e.preventDefault();
             deferredPrompt = e;
-            banner.classList.add('visible');  // show our banner
+            banner.classList.add('visible');
         });
 
         btnInstall.addEventListener('click', async () => {
-            if (!deferredPrompt) return;      // iOS path handled above
+            if (!deferredPrompt) return;
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log('Install outcome:', outcome);
             deferredPrompt = null;
             banner.classList.remove('visible');
         });
 
-        btnDismiss.addEventListener('click', () => {
-            banner.classList.remove('visible');
-        });
+        btnDismiss.addEventListener('click', () => banner.classList.remove('visible'));
+        btnIosClose.addEventListener('click', () => iosModal.classList.remove('visible'));
 
-        btnIosClose.addEventListener('click', () => {
-            iosModal.classList.remove('visible');
-        });
-
-        // Hide banner once app is installed
         window.addEventListener('appinstalled', () => {
             banner.classList.remove('visible');
             deferredPrompt = null;
-            console.log('✅ App installed successfully');
         });
     </script>
 </body>
